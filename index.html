@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Trouble</title>
+    <title>News URWay</title>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
       charset="utf-8"
@@ -16,40 +16,43 @@
       <header id="header">
         <h1>News URWay</h1>
       </header>
-      <!-- <form>
-        <input
-          type="text"
-          class="inputLimit"
-          placeholder="Enter number of results"
-        />
-        <input type="button" class="brooklyn" value="Brooklyn" />
-      </form> -->
+
       <div id="parentContainer">
         <div id="column1">
           <nav id="leftNav">
-            <h1>Left Nave</h1>
-            <div>click 1</div>
-            <div>click 1</div>
-            <div>click 1</div>
+            <!-- <h1>Left Nav</h1> -->
+            <h1> </h1>
+            <div class="leftLinks" id="link1">Headlines</div>
+            <div class="leftLinks" id="search">
+              <form>
+                <input type="text" class="search" id="search" placeholder="Search" />
+                <input type="submit" name="search" value="seach">
+              </form> 
+
+            </div>
+            <div class="leftLinks" id="link3">
+              <a href="https://generalassemb.ly" target="_blank"
+                >General Assembly</a
+              >
+            </div>
+            <div id="searchV"></div>
+
+            </nav>
           </nav>
         </div>
         <div id="column2">
           <div class="articleListImage">
             <div id="articleList"></div>
-
-            <div id="articleImage">
-              <!-- <img
-                src="https://cdn.vox-cdn.com/thumbor/YT2avJIUT9RCMlerOItGNuZpYLA=/23x0:978x500/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/19289055/Blogpost_earbuds.max_1000x1000.png"
-                alt="Girl in a jacket"
-                style="width:300px;height:300px;"
-              /> -->
-            </div>
+            <div id="articleImage"></div>
           </div>
 
           <article id="content"></article>
 
-          <footer id="footer">
-            <h1>footer</h1>
+          <footer class="footer">
+            <p>
+              Powered by
+              <a href="https://newsapi.org/" target="_blank">NewsAPI.org</a>
+            </p>
           </footer>
         </div>
       </div>
