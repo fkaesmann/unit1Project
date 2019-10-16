@@ -7,10 +7,8 @@ $(() => {
     // $ul.appendTo(".parentContainer");
 
     console.log("in handleData");
-    console.log("fred api", newsResults.totalResults);
-    // console.log("fred articles", newsResults.articles);
-    // console.log("fred articles title", newsResults.articles[0].title);
-    // console.log("fred articles length", newsResults.articles.length);
+    // console.log("fred api", newsResults.totalResults);
+  
     const $h1 = $("<h1>");
     $h1.text("Article List");
     $("#articleList").append($h1);
@@ -18,20 +16,30 @@ $(() => {
     //Loop through
     for (let i = 0; i < newsResults.articles.length - 1; i++) {
       const $div = $("<div>");
-
+//Setup title of news article
       const $p = $("<h5>");
       $p.text(newsResults.articles[i].title);
       $p.attr("id", "article");
       $p.addClass("article");
       $("#articleList").append($p);
+      //
+      //Setup content of news article
       const $p1 = $("<p>");
       $p1.addClass("hideMe");
       $p1.text(newsResults.articles[i].content);
       $p.append($p1);
-      // const $p2 = $("<p>");
-      // $p2.addClass("hideMe");
-      // $p2.text(newsResults.articles[i].content);
-      // $p1.append($p2);
+
+        //
+      //Setup description of news article
+      const $p2 = $("<p>");
+      $p2.addClass("hideMe");
+      $p2.text(newsResults.articles[i].description);
+      $p.append($p2);
+            //Setup image of news article
+      const $p3 = $("<p>");
+      $p3.addClass("hideMe");
+      $p3.text(newsResults.articles[i].urlToImage);
+      $p.append($p3);
 
       // console.log(newsResults.articles[i].title);
       // console.log(newsResults.articles[i].description);
@@ -68,15 +76,37 @@ $(() => {
 
   $("#articleList").on("click", ".article", event => {
     let $target = $(event.currentTarget);
-    // console.log($target.children().eq(0)[0].innerHTML);
-    let $ttt = $target.children().eq(0)[0].innerHTML;
+     
+    let $content = $target.children().eq(0)[0].innerHTML;
+    let $description = $target.children().eq(1)[0].innerHTML;
+    let $image = $target.children().eq(2)[0].innerHTML;
+    console.log("Fred 1", $description)
+    console.log("Fred 2 ", $content)
+    console.log("Fred 3 ", $image)
+
+
     // $target.css("background-color", "rgb(255,255,255");
     $("#content").text("");
     let $p = $("<p>");
-    $p.text($ttt);
+    $p.text($description);
     $p.attr("id", "contentDetail");
     $p.addClass("contentDetail");
     $("#content").append($p);
+
+    //add the content
+    let $p1 = $("<p>");
+    $p1.text($content);
+    $p1.attr("id", "contentDetail");
+    $p1.addClass("contentDetail");
+    $("#content").append($p1);
+
+    $("#articleImage").text("");
+    let $img = $("<img>");
+    $img.attr('src',$image);
+    $img.attr('alt',"image");
+    $img.attr('style',"width:400px;height:300px");
+    $("#articleImage").append($img);
+
   });
   // event.preventDefault();
   console.log("in brooklyn");
