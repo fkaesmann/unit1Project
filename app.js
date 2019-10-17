@@ -1,5 +1,7 @@
 $(() => {
   imageFlip = 0;
+  // text = "";
+  selectedText = "";
 
   const handleData = newsResults => {
     const $h1 = $("<h1>");
@@ -116,6 +118,23 @@ $(() => {
     $img.attr("alt", "image");
     $img.attr("style", "width:400px;height:300px");
     $("#articleImage").append($img);
+
+    //setup for Print option
+    $("#hideForPrint").text("");
+    let $pPrint = $("<p>");
+    $pPrint.text($description);
+    $pPrint.addClass("contentDetail");
+    $("#hideForPrint").append($pPrint);
+
+    let $pPrint1 = $("<p>");
+    $pPrint1.text($content);
+    $pPrint1.addClass("contentDetail");
+    $("#hideForPrint").append($pPrint1);
+
+    let $img1 = $("<img>");
+    $img1.attr("src", $image);
+    $img1.attr("style", "width:400px;height:300px");
+    $("#hideForPrint").append($img1);
   });
 
   ///////////////////////////////////////////////////////////
@@ -134,9 +153,43 @@ $(() => {
     $.ajax({url: endpoint}).then(handleData);
   });
 
+  //Fred start
+  function getSelectionText() {
+    var text = "";
+    var activeEl = document.activeElement;
+    var activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+    if (
+      activeElTagName == "textarea" ||
+      (activeElTagName == "input" &&
+        /^(?:text|search|password|tel|url)$/i.test(activeEl.type) &&
+        typeof activeEl.selectionStart == "number")
+    ) {
+      text = activeEl.value.slice(
+        activeEl.selectionStart,
+        activeEl.selectionEnd
+      );
+    } else if (window.getSelection) {
+      text = window.getSelection().toString();
+    }
+    return text;
+  }
+
+  document.onmouseup = document.onkeyup = document.onselectionchange = function() {
+    // document.getElementById("parentContainer").value = getSelectionText();
+    selectedText = getSelectionText();
+
+    if (selectedText !== "") {
+      //Clearn contents
+      $("#articleList").text("");
+      $("#content").text("");
+      let endpoint = `https://newsapi.org/v2/everything?q=${selectedText}&apiKey=8a8d89a8254e42609470f3760d59751d`;
+      selectedText = "";
+      $.ajax({url: endpoint}).then(handleData);
+    }
+    //Fred start
+  };
   let endpoint = `https://newsapi.org/v2/top-headlines?country=us&apiKey=8a8d89a8254e42609470f3760d59751d`;
   $.ajax({url: endpoint}).then(handleData);
   // $(event.currentTarget).trigger("reset");
-  //https://newsapi.org/v2/everything?q=${category:technology}&apiKey=8a8d89a8254e42609470f3760d59751d
   //dont write below
 });

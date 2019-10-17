@@ -129,17 +129,6 @@ h5:hover {
   justify-content: center;
 }
 
-/* #content {
-  background-color: white;
-  flex: 1;
-  min-height: 13vh;
-  margin: 1px;
-  overflow: scroll;
-  font-size: 21px;
-  font-family: "Times New Roman", Times, serif;
-  text-align: left;
-} */
-
 article {
   background-color: white;
   flex: 1;
@@ -166,4 +155,18 @@ article {
 
 .hideMe {
   display: none;
+}
+
+#hideForPrint {
+  display: none;
+  width: 80%;
+}
+
+@media print {
+  #parentContainer {
+    display: none;
+  }
+  #hideForPrint {
+    display: block;
+  }
 }
