@@ -1,6 +1,12 @@
 $(() => {
+  ///////////////////////////////////////////////////////////
+  //   Fred Kaesmann                                        /
+  //   Oct. 2019                                            /
+  //   unit1Project1                                        /
+  //   news.api aggregation site                            /
+  ///////////////////////////////////////////////////////////
+
   imageFlip = 0;
-  // text = "";
   selectedText = "";
 
   const handleData = newsResults => {
@@ -8,19 +14,22 @@ $(() => {
     $h1.text("Articles");
     $("#articleList").append($h1);
 
-    //Loop through
+    //Loop through returned articles from the API
+    //Hide all the details in hidden paragraphs
     for (let i = 0; i < newsResults.articles.length - 1; i++) {
-      // If first time on page load, display the first news article returned
+      // If first time on page load, display the first news article
       if (i == 0) {
         loadArticle(newsResults.articles[0]);
       }
-      const $div = $("<div>");
+
       //Setup title of news article
+      const $div = $("<div>");
       const $p = $("<h5>");
+
+      //Setup title of news article
       $p.text(newsResults.articles[i].title);
       $p.attr("id", "article");
       $p.addClass("article");
-      // $p.css("hover", "red");
       $("#articleList").append($p);
 
       //Setup content of news article
@@ -34,6 +43,7 @@ $(() => {
       $p2.addClass("hideMe");
       $p2.text(newsResults.articles[i].description);
       $p.append($p2);
+
       //Setup image of news article
       const $p3 = $("<p>");
       $p3.addClass("hideMe");
@@ -44,9 +54,10 @@ $(() => {
   };
   //
   $("img").on("error", function() {
-    $(this).attr("src", "missing.png");
+    $(this).attr("src", "./missing.jpeg");
   });
 
+  //When loading the page, setup the first article content and image
   const loadArticle = firstArticle => {
     $("#content").text("");
     let $p = $("<p>");
@@ -54,6 +65,7 @@ $(() => {
     $p.attr("id", "contentDetail");
     $p.addClass("contentDetail");
     $("#content").append($p);
+
     //add the content
     let $p1 = $("<p>");
     $p1.text(firstArticle.content);
@@ -61,11 +73,30 @@ $(() => {
     $p1.addClass("contentDetail");
     $("#content").append($p1);
     $("#articleImage").text("");
+
+    //setup image
     let $img = $("<img>");
     $img.attr("src", firstArticle.urlToImage);
     $img.attr("alt", "image");
     $img.attr("style", "width:400px;height:300px");
     $("#articleImage").append($img);
+
+    //setup for Print option in hidden <div>
+    $("#hideForPrint").text("");
+    let $pPrint = $("<p>");
+    $pPrint.text(firstArticle.description);
+    $pPrint.addClass("contentDetail");
+    $("#hideForPrint").append($pPrint);
+
+    let $pPrint1 = $("<p>");
+    $pPrint1.text(firstArticle.content);
+    $pPrint1.addClass("contentDetail");
+    $("#hideForPrint").append($pPrint1);
+
+    let $img1 = $("<img>");
+    $img1.attr("src", firstArticle.urlToImage);
+    $img1.attr("style", "width:400px;height:300px");
+    $("#hideForPrint").append($img1);
   };
 
   ///////////////////////////////////////////////////////////
@@ -74,6 +105,7 @@ $(() => {
   $("#leftNav").on("click", "#link1", event => {
     location.reload();
   });
+
   ///////////////////////////////////////////////////////////
   //   Reset page back to headlines                         /
   ///////////////////////////////////////////////////////////
@@ -89,7 +121,7 @@ $(() => {
   });
 
   ///////////////////////////////////////////////////////////
-  //   setup the article on click                           /
+  //   setup the article on clicked article                 /
   ///////////////////////////////////////////////////////////
   $("#articleList").on("click", ".article", event => {
     let $target = $(event.currentTarget);
@@ -143,7 +175,7 @@ $(() => {
   $("form").on("submit", event => {
     event.preventDefault();
 
-    //Clearn contents
+    //Clean contents
     $("#articleList").text("");
     $("#content").text("");
 
@@ -153,7 +185,16 @@ $(() => {
     $.ajax({url: endpoint}).then(handleData);
   });
 
-  //Fred start
+  ///////////////////////////////////////////////////////////
+  //   Handle the print command (display hidden <div>)      /
+  ///////////////////////////////////////////////////////////
+  $("#leftNav").on("click", "#printPage", event => {
+    window.print();
+  });
+
+  ///////////////////////////////////////////////////////////
+  // Handle searching on the selected text after double click  /
+  ///////////////////////////////////////////////////////////
   function getSelectionText() {
     var text = "";
     var activeEl = document.activeElement;
@@ -175,7 +216,6 @@ $(() => {
   }
 
   document.onmouseup = document.onkeyup = document.onselectionchange = function() {
-    // document.getElementById("parentContainer").value = getSelectionText();
     selectedText = getSelectionText();
 
     if (selectedText !== "") {
@@ -186,7 +226,7 @@ $(() => {
       selectedText = "";
       $.ajax({url: endpoint}).then(handleData);
     }
-    //Fred start
+    //End of double click on text
   };
   let endpoint = `https://newsapi.org/v2/top-headlines?country=us&apiKey=8a8d89a8254e42609470f3760d59751d`;
   $.ajax({url: endpoint}).then(handleData);
