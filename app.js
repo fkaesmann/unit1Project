@@ -1,13 +1,13 @@
 $(() => {
-  const handleData = newsResults => {
+  imageFlip = 0;
 
+  const handleData = newsResults => {
     const $h1 = $("<h1>");
     $h1.text("Articles");
     $("#articleList").append($h1);
 
     //Loop through
     for (let i = 0; i < newsResults.articles.length - 1; i++) {
-
       // If first time on page load, display the first news article returned
       if (i == 0) {
         loadArticle(newsResults.articles[0]);
@@ -41,6 +41,9 @@ $(() => {
     }
   };
   //
+  $("img").on("error", function() {
+    $(this).attr("src", "missing.png");
+  });
 
   const loadArticle = firstArticle => {
     $("#content").text("");
@@ -68,6 +71,19 @@ $(() => {
   ///////////////////////////////////////////////////////////
   $("#leftNav").on("click", "#link1", event => {
     location.reload();
+  });
+  ///////////////////////////////////////////////////////////
+  //   Reset page back to headlines                         /
+  ///////////////////////////////////////////////////////////
+  $("#articleImage").on("click", event => {
+    let $target = $(event.currentTarget);
+    if (imageFlip == 0) {
+      imageFlip = 1;
+      $target.css("transform", "scaleX(-1)");
+    } else {
+      imageFlip = 0;
+      $target.css("transform", "scaleX(+1)");
+    }
   });
 
   ///////////////////////////////////////////////////////////
@@ -102,27 +118,25 @@ $(() => {
     $("#articleImage").append($img);
   });
 
-   ///////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////
   //   Handle search field                                  /
   ///////////////////////////////////////////////////////////
   $("form").on("submit", event => {
     event.preventDefault();
 
-    //Clearn contents 
+    //Clearn contents
     $("#articleList").text("");
     $("#content").text("");
 
-    searchValue =  $(".search").val();
+    searchValue = $(".search").val();
     let endpoint = `https://newsapi.org/v2/everything?q=${searchValue}&apiKey=8a8d89a8254e42609470f3760d59751d`;
     $(event.currentTarget).trigger("reset");
     $.ajax({url: endpoint}).then(handleData);
-
   });
-
 
   let endpoint = `https://newsapi.org/v2/top-headlines?country=us&apiKey=8a8d89a8254e42609470f3760d59751d`;
   $.ajax({url: endpoint}).then(handleData);
   // $(event.currentTarget).trigger("reset");
-
+  //https://newsapi.org/v2/everything?q=${category:technology}&apiKey=8a8d89a8254e42609470f3760d59751d
   //dont write below
 });
