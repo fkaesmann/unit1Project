@@ -11,11 +11,14 @@ function allowDrop(ev) {
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
-  //   ev.target.appendChild(document.getElementById(data));
+
   let title = document.getElementById(data).innerHTML;
   var res = title.substring(0, 15);
   const $favItem = $("<li>");
   $favItem.append(res);
+  $favItem.attr("id", res);
+  $favItem.attr("draggable", "true");
+  $favItem.attr("ondragstart", "drag(event)");
   $favList.append($favItem);
 
   objContent = $("#content").eq(0)[0].innerHTML;
@@ -26,10 +29,19 @@ function drop(ev) {
     image: $("#imageID").eq(0)[0].src
   };
 
-  console.log("obj.title ", obj.title);
-  console.log("obj.content1 ", obj.content1);
-  console.log("obj.image ", obj.image);
-
   let myJSON = JSON.stringify(obj);
   localStorage.setItem(res, myJSON);
+}
+
+///////////////////////////////////////////////////////////
+// remove a favorate
+///////////////////////////////////////////////////////////
+
+function dropRemove(ev) {
+  ev.preventDefault();
+
+  var data = ev.dataTransfer.getData("text");
+  //   console.log("ev drop2  ", data);
+  document.getElementById(data).remove();
+  localStorage.removeItem(data);
 }
