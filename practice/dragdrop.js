@@ -1,13 +1,12 @@
 function drag(ev) {
-  //   console.log("fred drag ev", ev);
   ev.dataTransfer.setData("text", ev.target.id);
 }
 
 function allowDrop(ev) {
-  //   console.log("fred allowDrop ev", ev);
   ev.preventDefault();
 }
 
+//Take the article and store it in locatl storage location
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
@@ -22,7 +21,17 @@ function drop(ev) {
   $favList.append($favItem);
 
   objContent = $("#content").eq(0)[0].innerHTML;
+  console.log("function drop 0", $("#content").eq(0)[0]);
+  objFirst = $("#content")
+    .first()
+    .text();
+  //   objLast = $("#content")
+  //     .first()
+  //     .text();
 
+  //   console.log("objFirst", objFirst);
+  console.log("objContent", objContent);
+  $p = $("<p>");
   var obj = {
     title: res,
     content1: objContent,
@@ -36,12 +45,10 @@ function drop(ev) {
 ///////////////////////////////////////////////////////////
 // remove a favorate
 ///////////////////////////////////////////////////////////
-
 function dropRemove(ev) {
   ev.preventDefault();
 
   var data = ev.dataTransfer.getData("text");
-  //   console.log("ev drop2  ", data);
   document.getElementById(data).remove();
   localStorage.removeItem(data);
 }

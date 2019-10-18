@@ -6,7 +6,6 @@ $(() => {
   //   news.api aggregation site                            /
   ///////////////////////////////////////////////////////////
 
-  // $favList = "";
   imageFlip = 0;
   selectedText = "";
   $favList = $("<ul>");
@@ -14,23 +13,20 @@ $(() => {
 
   $("#div1").append($favList);
 
+  ///////////////////////////////////////////////////////////
   //load local storage into favorates (if there)
+  ///////////////////////////////////////////////////////////
   if (localStorage.length > 0) {
-    // console.log("localStorage.length", localStorage.length);
-
     for (var i = 0; i < localStorage.length; i++) {
       let favString = localStorage.getItem(localStorage.key(i));
       var obj = JSON.parse(favString);
-      console.log("favString obj ", obj.title);
+      // console.log("favString obj ", obj.title);
       const $favItem = $("<li>");
       $favItem.append(obj.title);
       $favItem.attr("id", obj.title);
       $favItem.attr("draggable", "true");
       $favItem.attr("ondragstart", "drag(event)");
       $favList.append($favItem);
-
-      // console.log("obj.content1 = ", obj.content1);
-      // $("#content").text(obj.content1);
     }
   }
 
@@ -269,8 +265,9 @@ $(() => {
 
     var obj = JSON.parse(pulled);
 
-    console.log("obj.content1 = ", obj.content1);
-    $("#content").text(obj.content1);
+    // $("#content").text(obj.content1);
+    $("#content").html(obj.content1);
+    $("img").attr("src", obj.image);
   });
 
   let endpoint = `https://newsapi.org/v2/top-headlines?country=us&apiKey=8a8d89a8254e42609470f3760d59751d`;
