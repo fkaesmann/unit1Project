@@ -8,6 +8,7 @@
       charset="utf-8"
     ></script>
     <script src="app.js" charset="utf-8"></script>
+    <script src="dragdrop.js" charset="utf-8"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -38,8 +39,18 @@
               >
             </div>
             <div id="searchV"></div>
-
-            <div class="leftLinks" id="printPage">Printable Page</div>
+            <div class="leftLinks" id="printPage">Print Page</div>
+            <div id="favContainer" class="leftLinks">
+              <div>Favorates</div>
+              <br />
+              <div
+                id="div1"
+                ondrop="drop(event)"
+                ondragover="allowDrop(event)"
+              ></div>
+              <div><p></p></div>
+              <div id="remove"><br />Remove</div>
+            </div>
           </nav>
         </div>
         <div id="column2">
