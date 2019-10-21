@@ -13,7 +13,7 @@
       .main-container {
         display: flex;
         color: red;
-        justify-content: space-around;
+        justify-content: center;
 
         flex-wrap: wrap;
         background-color: DodgerBlue;
@@ -39,7 +39,7 @@
 
       .navbar {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         background-color: yellow;
         position: fixed;
         top: 0;
@@ -49,19 +49,24 @@
   </head>
   <body>
     <div class="header">
-      <div>Fred news</div>
+      <div>
+        <p>Fred news</p>
+        <img
+          src="download.png"
+          alt="Smiley face"
+          id="fredImg"
+          class="fredImg"
+          onerror="myFunction(this)"
+          height="42"
+          width="42"
+        />
+      </div>
     </div>
   </body>
 
   <div class="main-container">
     <div>a</div>
     <div>b</div>
-    <div>c</div>
-    <div>d</div>
-    <div>5</div>
-    <div>6</div>
-    <div>7</div>
-    <div>8</div>
   </div>
   <div class="main-container">
     <div>a</div>
@@ -71,32 +76,14 @@
     <div>a</div>
     <div>b</div>
   </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
-  <div class="main-container">
-    <div>a</div>
-    <div>b</div>
-  </div>
+  <script>
+    function myFunction(image) {
+      console.log("The image could not be loaded.", image);
+      // $("img").attr("src", "missing.jpeg");
+
+      image.onerror = "";
+      image.src = "missing.gif";
+      return true;
+    }
+  </script>
 </html>

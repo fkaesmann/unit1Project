@@ -77,8 +77,9 @@ $(() => {
     }
   };
   //
-  $("img").on("error", function() {
-    $(this).attr("src", "./missing.jpeg");
+  $("#imageID").on("error", function() {
+    // console.log("Image error  ");
+    $(this).attr("src", "missing.gif");
   });
 
   //When loading the page, setup the first article content and image

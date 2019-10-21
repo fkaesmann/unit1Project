@@ -17,6 +17,7 @@ body {
   padding: 1px;
   min-width: 20vh;
   order: inherit;
+  justify-content: center;
 }
 
 #column2 {
@@ -32,6 +33,8 @@ body {
   flex: 1;
   margin: 1px;
   min-width: 15vh;
+  justify-content: center;
+  flex-flow: column;
 }
 .leftLinks {
   background-color: rgb(76, 116, 175);
