@@ -20,7 +20,6 @@ $(() => {
     for (var i = 0; i < localStorage.length; i++) {
       let favString = localStorage.getItem(localStorage.key(i));
       var obj = JSON.parse(favString);
-      // console.log("favString obj ", obj.title);
       const $favItem = $("<li>");
       $favItem.append(obj.title);
       $favItem.attr("id", obj.title);

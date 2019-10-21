@@ -1,23 +1,31 @@
-# unit1Project1
+# Unit1 Project1
 
-unit1Project1 is a news aggregation  side displaying news.api articles
+Unit1Project1 is a news aggregation site displaying news.api articles. The application alows searching by key words and saving favorite artlces in Local Storage
 
 ## Installation
 
-Copy down the files, run in node
+Copy down all files, run in nodejs
 
-```bash
-Installation
+## Key Components
+
+```
+JavaScript
+jQuery
+HTML
+CSS
+flexbox
+localStorage
+import none
 ```
 
-## Usage
+## Key Functions
 
-```JavaScript jQuery HTML CSS
-import f???
+```
+handleData - Loops through the news articles returend from the API, and displays all data in the #articleList <div>
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+loadArticle - Loads the first article returned from the API on to the page
+
+getSelectionText - Gets the double clicked text for the search
 ```
 
 ## Contributing
@@ -28,7 +36,7 @@ Please make sure to update tests as appropriate.
 
 ## Authors and acknowledgment
 
-The General Assembly instructors were helpfull in developing this site
+The General Assembly instructors were key resouces in developing this site
 
 ## License
 

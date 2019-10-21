@@ -1,0 +1,106 @@
+body {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#parentContainer {
+  background-color: pink;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  color: rgb(0, 0, 255);
+}
+
+#column1 {
+  background-color: goldenrod;
+  flex: 1;
+  display: flex;
+  padding: 10px;
+  order: inherit;
+}
+
+#column2 {
+  background-color: fuchsia;
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  order: inherit;
+}
+
+#leftNav {
+  background-color: #8fbc8f;
+  flex: 1;
+  margin: 10px;
+  min-width: 15vh;
+}
+
+#header {
+  background-color: rgb(158, 158, 223);
+  color: white;
+  min-height: 15vh;
+  order: -1;
+  position: static;
+  /* position: fixed;
+  margin: 20px;
+  min-height: 15vh;
+  flex-flow: row nowrap;
+  top: 0;
+  width: 100%;
+
+  order: 1; */
+  /* display: flex;
+  align-items: center;
+  flex: 1;
+
+  position: fixed;
+  width: 100%;
+  height: 40px; */
+}
+
+.articleListImage {
+  background-color: purple;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 10px;
+  min-height: 30vh;
+}
+img {
+  width: 100%;
+}
+
+#articleList {
+  background-color: red;
+  flex: 1;
+  margin: 10px;
+  min-width: 40vh;
+  height: 300px;
+  overflow: scroll;
+}
+
+#articleImage {
+  background-color: yellow;
+  flex: 1;
+  margin: 10px;
+  min-width: 40vh;
+  height: 300px;
+  align-items: center;
+}
+
+#content {
+  background-color: brown;
+  flex: 1;
+  margin: 10px;
+}
+
+#footer {
+  background-color: black;
+  color: white;
+  flex: 1;
+  margin: 10px;
+}

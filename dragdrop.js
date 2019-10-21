@@ -7,7 +7,7 @@ function allowDrop(ev) {
 }
 
 //Take the article and store it in locatl storage location
-// .progress {cursor: progress;}
+
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
