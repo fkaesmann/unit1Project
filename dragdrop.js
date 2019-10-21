@@ -7,6 +7,7 @@ function allowDrop(ev) {
 }
 
 //Take the article and store it in locatl storage location
+// .progress {cursor: progress;}
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
@@ -25,9 +26,6 @@ function drop(ev) {
   objFirst = $("#content")
     .first()
     .text();
-  //   objLast = $("#content")
-  //     .first()
-  //     .text();
 
   //   console.log("objFirst", objFirst);
   console.log("objContent", objContent);
@@ -43,7 +41,7 @@ function drop(ev) {
 }
 
 ///////////////////////////////////////////////////////////
-// remove a favorate
+// remove a Favorite
 ///////////////////////////////////////////////////////////
 function dropRemove(ev) {
   ev.preventDefault();

@@ -8,27 +8,6 @@ $(() => {
 
   imageFlip = 0;
   selectedText = "";
-  $favList = $("<ul>");
-  $favList.addClass("divFavorate");
-
-  $("#div1").append($favList);
-
-  ///////////////////////////////////////////////////////////
-  //load local storage into favorates (if there)
-  ///////////////////////////////////////////////////////////
-  if (localStorage.length > 0) {
-    for (var i = 0; i < localStorage.length; i++) {
-      let favString = localStorage.getItem(localStorage.key(i));
-      var obj = JSON.parse(favString);
-      // console.log("favString obj ", obj.title);
-      const $favItem = $("<li>");
-      $favItem.append(obj.title);
-      $favItem.attr("id", obj.title);
-      $favItem.attr("draggable", "true");
-      $favItem.attr("ondragstart", "drag(event)");
-      $favList.append($favItem);
-    }
-  }
 
   const handleData = newsResults => {
     const $h1 = $("<h1>");
@@ -49,23 +28,19 @@ $(() => {
 
       //Setup title of news article
       $p.text(newsResults.articles[i].title);
-      $p.attr("id", "article" + i);
-      $p.attr("draggable", "true");
-      $p.attr("ondragstart", "drag(event)");
+      $p.attr("id", "article");
       $p.addClass("article");
       $("#articleList").append($p);
 
       //Setup content of news article
       const $p1 = $("<p>");
       $p1.addClass("hideMe");
-      $p1.attr("id", "contentDetail");
       $p1.text(newsResults.articles[i].content);
       $p.append($p1);
 
       //Setup description of news article
       const $p2 = $("<p>");
       $p2.addClass("hideMe");
-      $p2.attr("id", "contentDetail2");
       $p2.text(newsResults.articles[i].description);
       $p.append($p2);
 
@@ -102,7 +77,6 @@ $(() => {
     //setup image
     let $img = $("<img>");
     $img.attr("src", firstArticle.urlToImage);
-    $img.attr("id", "imageID");
     $img.attr("alt", "image");
     $img.attr("style", "width:400px;height:300px");
     $("#articleImage").append($img);
@@ -173,7 +147,6 @@ $(() => {
     $("#articleImage").text("");
     let $img = $("<img>");
     $img.attr("src", $image);
-    $img.attr("id", "imageID");
     $img.attr("alt", "image");
     $img.attr("style", "width:400px;height:300px");
     $("#articleImage").append($img);
@@ -255,21 +228,6 @@ $(() => {
     }
     //End of double click on text
   };
-
-  //On click of the Favorates, disply object
-  $("#div1").on("click", "ul > li", event => {
-    let $target = $(event.currentTarget);
-    // console.log("fav clic title", $target. eq(0)[0].innerHTML);
-    let title = $target.eq(0)[0].innerHTML;
-    let pulled = localStorage.getItem(title);
-
-    var obj = JSON.parse(pulled);
-
-    // $("#content").text(obj.content1);
-    $("#content").html(obj.content1);
-    $("img").attr("src", obj.image);
-  });
-
   let endpoint = `https://newsapi.org/v2/top-headlines?country=us&apiKey=8a8d89a8254e42609470f3760d59751d`;
   $.ajax({url: endpoint}).then(handleData);
   // $(event.currentTarget).trigger("reset");
